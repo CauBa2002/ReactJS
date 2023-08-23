@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>
+        //DOM
+        //1
+        const h1DOM = document.createElement('h1')
+        h1DOM.title = 'Hello'
+        h1DOM.className = 'heading'
+        h1DOM.innerText = 'Hello Guys!'
+
+        //document.body.appendChild(h1DOM)
+
+        //2
+        const ulDOM = document.createElement('ul')
+
+        const liDOM1 = document.createElement('li')
+        liDOM1.innerText = 'Javascript'
+
+        const liDOM2 = document.createElement('li')
+        liDOM2.innerText = 'ReactJS'
+        
+        ulDOM.appendChild(liDOM1)
+        ulDOM.appendChild(liDOM2)
+
+        //document.body.appendChild(ulDOM)
+
+        //3
+
+        const divD = document.createElement('div')
+        divD.className = 'post-item'
+
+        const h2D = document.createElement('h2')
+        h2D.title = 'Học ReactJS tại F8'
+        h2D.innerText = 'Học ReactJS'
+
+        const pD = document.createElement('p')
+        pD.innerText = 'Học ReactJS từ cơ bản đến nâng cao'
+
+        divD.appendChild(h2D)
+        divD.appendChild(pD)
+
+        //document.body.appendChild(divD)
+
+        //React
+        const container =  document.getElementById('root')
+        //1
+        const h1React = React.createElement('h1',{
+            title : 'Hello',
+            className : 'heading'
+        }, 'Hello guys!')
+
+
+        //ReactDOM.render(h1React, container)
+        
+        //2
+        const ulReact = React.createElement(
+            'ul',
+            null,
+            React.createElement('li', null, 'Javascript'),
+            React.createElement('li', null, 'ReactJS')
+        )
+
+        //ReactDOM.render(ulReact, container)
+
+        //3
+        //ver17
+        const postItem = React.createElement(
+                'div', {
+                className : 'post-item'  
+            },
+            React.createElement('h2',{
+                title : 'Học ReactJS tại F8'
+            }, 'Học ReactJS'),
+            React.createElement('p', null, 'Học ReactJS từ cơ bản đến nâng cao'),
+        )
+
+        //ReactDOM.render(postItem, container)
+        //ver18
+        //const root = ReactDOM.createRoot(container)
+        //root.render(postItem)
+
+        //Bài Tập
+        
+    </script>
+</body>
+</html>

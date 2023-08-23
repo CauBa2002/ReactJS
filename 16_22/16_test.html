@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+        function PostItem({
+            image,
+            title,
+            description,
+            publishedAt,
+            callback = () => {},
+        }){
+            callback(Math.random())
+            return(
+                <div className="post-item">
+                    <label htmlFor="email">Email</label>
+                    <input id="email" type="text"/>
+                    <img src={image} alt={title} />
+                    <h2 className="post-title">{title}</h2>
+                    <p className="post-desc">{description}</p>
+                    <p className="post-published">{publishedAt}</p>
+                </div>
+            )
+        }
+
+        function App() {
+            return (
+                <div className="posts-list">
+                    <PostItem
+                        title= "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+                        image= "https://i.pinimg.com/564x/2c/49/31/2c4931f3d595ad31d5dbeb72c5e29cea.jpg"
+                        description= "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+                        publishedAt="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+                        callback = {(random) => {
+                            console.log('random: ', random);
+                        }}
+                    />
+                    <PostItem
+                        title= "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+                        image= "https://i.pinimg.com/564x/2c/49/31/2c4931f3d595ad31d5dbeb72c5e29cea.jpg"
+                        description= "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+                        publishedAt="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+                    />
+                    <PostItem
+                        title= "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+                        image= "https://i.pinimg.com/564x/2c/49/31/2c4931f3d595ad31d5dbeb72c5e29cea.jpg"
+                        description= "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+                        publishedAt="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+                    />
+                </div>
+            )
+        } 
+
+        ReactDOM.render(<App/>,document.getElementById('app'))
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+B1: npm init
+B2: install webpack webpack-cli
+    npm i webpack webpck-cli --save-dev
+B3: install react react-dom --save
+    update : npm install react@latest react-dom@latest
+    refund : npm install react@(version) react-dom@(version)
+B4: install babel
+    npm install @babel/core babel-loader @babel/preset-env @babel/preset-react --save-dev
+B5: create public/index.html
+B6: add id #root into index.html
+B7: create src/index.js và thêm nội dung
+    Ex :import React from 'react' // nạp thư viện react
+        import ReactDOM from 'react-dom' // nạp thư viện react-dom
+
+        // Tạo component App
+        function App() {
+            return (
+                <div>
+                    <h1>Xin chào anh em F8!</h1>
+                </div>
+            )
+        }
+
+        // Render component App vào #root element
+        ReactDOM.render(<App />, document.getElementById('root'))
+B8: install css-loader style-loader
+    npm install css-loader style-loader --save-dev
+B9: create webpack.config.js và thêm nội dung
+    const path = require("path");
+
+    module.exports = {
+    entry: "./src/index.js", // Dẫn tới file index.js ta đã tạo
+    output: {
+        path: path.join(__dirname, "/build"), // Thư mục chứa file được build ra
+        filename: "bundle.js" // Tên file được build ra
+    },
+    module: {
+        rules: [
+        {
+            test: /\.js$/, // Sẽ sử dụng babel-loader cho những file .js
+            exclude: /node_modules/, // Loại trừ thư mục node_modules
+            use: ["babel-loader"]
+        },
+        {
+            test: /\.css$/, // Sử dụng style-loader, css-loader cho file .css
+            use: ["style-loader", "css-loader"]
+        }
+        ]
+    },
+    // Chứa các plugins sẽ cài đặt trong tương lai
+    plugins: [
+    ]
+    };
+B10: create .babelrc và thêm nội dung
+    {
+    "presets": [
+        "@babel/preset-env",
+        "@babel/preset-react"
+    ]
+    }
+B11: tại package.json thêm vào "scripts"
+    "scripts": {
+        ...
+        "start": "webpack --mode development --watch",
+        "build": "webpack --mode production"
+    }
+B12: run và build dự án
+    run : npm start ('build/bundle.js' sẽ được tạo trong project)
+    build : npm run build (Ngoài 'start' ra thì tất cả phải thêm 'run')
+B13: run project với live server (Sửa nội dung trong 'src/index.js')
+    <script src="../build/bundle.js"></script>
+B14: run project với local host (Xóa '<script src="../build/bundle.js"></script>' trong 'src/index.js')
+    B1: install html-webpack-plugin
+        npm install html-webpack-plugin --save-dev
+    B2: update cấu hình Webpack, tại webpack.config.js thêm :
+        const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+        module.exports = {
+        ...
+        // Chứa các plugins sẽ cài đặt trong tương lai
+        plugins: [
+            new HtmlWebpackPlugin({
+            template: "./public/index.html"
+            })
+        ]
+        };
+    B3: install webpack-dev-server
+        npm install webpack-dev-server --save-dev
+    B4: Sửa lại cấu hình package.json
+        "scripts": {
+            ...
+            "start": "webpack-dev-server --mode development --open --hot",
+            ...
+        }
+B15: run start
+
+
+
