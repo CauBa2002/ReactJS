@@ -8,13 +8,17 @@ import { useState } from "react";
 // - Chỉ gọi callback 1 lần sau khi component mounted
 //3. useEffect(callback, [deps])
 // - Callback sẽ được gọi lại mỗi khi deps thay đổi
+// ------------------------------------------------
+//1. Callback luôn được gọi sau khi component mounted
+//2. Cleanup function luôn được gọi trước khi component unmounted
 
 const tabs = ['posts', 'comments', 'albums']
 
-function Test(){
-    const [title, setTitle] = useState('')
+function CallBack(){
+    //const [title, setTitle] = useState('')
     const [posts, setPosts] = useState([])
     const [name, getName] = useState('posts')
+    const [BtnGoToTop, setBtnGoToTop] = useState(false)
     useEffect(() => {
         // 1. Example, useEffect(callback) sau khi component mounted
         // document.title = title
@@ -32,6 +36,29 @@ function Test(){
             } )
     }, [name])
 
+    useEffect(() => {
+        const handleScroll = () => {
+            if(window.scrollY > 300){
+                setBtnGoToTop(true)
+            } else{
+                setBtnGoToTop(false)
+            }
+            //if(window.scrollY > 300)
+        }
+        window.addEventListener('scroll', handleScroll)
+        console.log('addEventListener')
+        //Cleanup function
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+            console.log('removeEventListener')
+        }
+    }, [])
+
+    const GotoTop = () => {
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    }
+
     return(
         <div>
             {tabs.map(tab => (
@@ -45,18 +72,27 @@ function Test(){
                     {tab}
                 </button>
             ))}
-            {console.log(name)}
-            <input type="text" 
+            {/* <input type="text" 
                 value={title}
                 onChange={e => setTitle(e.target.value)}
-            />
-            <ul>
-                {posts.map(post => (
-                    <li key={post.id}>{post.title || post.name}</li>
-                ))}
-            </ul>
+            /> */}
+            {posts.map(post => (
+                <li key={post.id}>{post.title || post.name}</li>
+            ))}
+            {BtnGoToTop && (
+                <button
+                    style={{
+                        position: 'fixed',
+                        right: 20,
+                        bottom: 20
+                    }}
+                    onClick={GotoTop}
+                    >
+                    Go to Top
+                </button>
+            )}
         </div>
     )
 }
 
-export default Test;
+export default CallBack;
